@@ -11,7 +11,7 @@ x = pd.DataFrame(irisDataset[1:, :4])
 y = pd.DataFrame(irisDataset[1:, 4]).values.flatten()
 
 # Split the data into training and testing sets
-X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=0)
+X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=0.3, random_state=16)
 
 # Initialize lists to store k values and corresponding accuracy scores
 k_values = []
@@ -22,12 +22,15 @@ k_range = range(1, 25)  # You can adjust the range as needed
 
 # Loop through different values of k
 for k in k_range:
-    classifier = KNeighborsClassifier(n_neighbors=k)
+    # classifier = KNeighborsClassifier(n_neighbors=k)
+    classifier = KNeighborsClassifier(n_neighbors=k,metric="euclidean")
+    # classifier = KNeighborsClassifier(n_neighbors=k,metric="anhattan")
     classifier.fit(X_train, y_train)
     y_pred = classifier.predict(X_test)
     accuracy = accuracy_score(y_test, y_pred)
     k_values.append(k)
     accuracy_scores.append(accuracy)
+    print(k,accuracy)
 
 # Plot the accuracy versus k values
 plt.figure(figsize=(10, 6))
