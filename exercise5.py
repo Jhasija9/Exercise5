@@ -18,13 +18,13 @@ k_values = []
 accuracy_scores = []
 
 # Define a range of k values to test
-k_range = range(1, 25)  # You can adjust the range as needed
+k_range = range(1, 11)  # You can adjust the range as needed
 
 # Loop through different values of k
 for k in k_range:
     # classifier = KNeighborsClassifier(n_neighbors=k)
     classifier = KNeighborsClassifier(n_neighbors=k,metric="euclidean")
-    # classifier = KNeighborsClassifier(n_neighbors=k,metric="anhattan")
+    # classifier = KNeighborsClassifier(n_neighbors=k,metric="manhattan")
     classifier.fit(X_train, y_train)
     y_pred = classifier.predict(X_test)
     accuracy = accuracy_score(y_test, y_pred)
